@@ -29,6 +29,7 @@ public class GameUI extends JFrame {
         jp.add(southPanel, BorderLayout.SOUTH);
         setTitle("Sten, sax, påse");
         pack();
+
         setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
