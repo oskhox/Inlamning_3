@@ -11,7 +11,10 @@ public class GameUI extends JFrame {
         //loop som skapar upp knappar och lägger till i panel
         ArrayList<String> buttons = new ArrayList<String>();
         for (int i = 0; i < ; i++) {
-            
+
+
+
+            //ändring
         }
 
         //layout
