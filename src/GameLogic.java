@@ -14,16 +14,14 @@ public class GameLogic implements ActionListener {
     public void actionPerformed(ActionEvent e){
 
         if (e.getSource() == "button1") { //eller vad knappen heter
-            System.out.println("Knapp 1 är tryckt på");
+            System.out.println("Knappen är tryckt på");
             //knappen som tryckts ska byta plats med den tomma knappen.
         }
         if (e.getSource() == "buttonNewGame") {
             System.out.println("Skapar nytt spel");
             //logik för nytt spel, alla brickor blandas i slumpmässig ordning, inga identiska
         }
-
     }
-
     //hjälpmetod checkValidButton som avgör om ruta är giltig för flytt eller inte.
     boolean checkValidButton(int button) {
         boolean isValid = false;
