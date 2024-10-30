@@ -63,7 +63,7 @@ public class GameUI extends JFrame {
         victoryLabel.setFont(new Font("Poppins", Font.BOLD, 20));
         victoryLabel.setVisible(false);
 
-        //Itererar genom knapparna och lägger till var och en i buttonsArray
+        //Itererar genom knapparna och lägger till var och en i buttonsArray samt i panelen
         int number = 1; //nummer på första knappen
         //Skapar upp 4 rader
         for (int row = 0; row < 4; row++) {
