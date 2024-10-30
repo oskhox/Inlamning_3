@@ -7,13 +7,12 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GameUI extends JFrame {
-
-    private JPanel panelBoxes = new JPanel();
-    private JPanel panelBottom = new JPanel();
-    private JButton startButton = new JButton("Nytt spel");
-    private JLabel victoryLabel = new JLabel("Grattis, du vann!");
+    private final JPanel panelBoxes = new JPanel();
+    private final JPanel panelBottom = new JPanel();
+    private final JButton startButton = new JButton("Nytt spel");
+    private final JLabel victoryLabel = new JLabel("Grattis, du vann!");
     private ArrayList<JButton> buttons = new ArrayList<>();
-    private int buttonIndex = 15;
+    private int index = 15;
 
     GameUI() {
 
@@ -30,7 +29,7 @@ public class GameUI extends JFrame {
 
         //Sätter layouter
         setLayout(new BorderLayout());
-        panelBoxes.setLayout(new GridLayout(4, 4, 5, 5));
+        panelBoxes.setLayout(new GridLayout(4, 4,1,1));
         panelBottom.setLayout(new FlowLayout());
 
         //Lägger till paneler till frame
@@ -40,34 +39,45 @@ public class GameUI extends JFrame {
         //Lägger till knapp och label till bottenpanel
         panelBottom.add(startButton);
         panelBottom.add(victoryLabel);
-        panelBottom.setBackground(Color.orange);
+        panelBottom.setBackground(Color.ORANGE);
 
-        //Sätter ram och paddding knappar
-        Border buttonBorder = new EmptyBorder(2, 2, 5, 2);
-        Border buttonPadding = new LineBorder(Color.black, 1, true);
+        //Sätter ram och padding panel boxes
+        Border buttonPadding = new EmptyBorder(1, 1, 1, 1);
+        Border buttonBorder = new LineBorder(Color.orange, 6, true);
 
         //Sätter design start knapp
-        startButton.setBackground(Color.ORANGE);
-        startButton.setFont(new Font("Arial", Font.BOLD, 20));
+        Border startButtonPadding = new EmptyBorder(5, 2, 5, 2);
+        Border startButtonBorder = new LineBorder(Color.BLACK, 3, true);
+        startButton.setForeground(Color.WHITE);
+        startButton.setBackground(Color.BLACK);
+        startButton.setOpaque(true);
+        startButton.setFont(new Font("Poppins", Font.BOLD, 20));
         startButton.setBorder(buttonBorder);
-        startButton.setBorder(new CompoundBorder(buttonBorder, buttonPadding));
-        startButton.setPreferredSize(new Dimension(150, 50));
+        startButton.setBorder(new CompoundBorder(startButtonBorder,startButtonPadding));
+        startButton.setPreferredSize(new Dimension(150,50));
 
         //Design och viss funktionalitet för vinst label
-        victoryLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        victoryLabel.setFont(new Font("Poppins", Font.BOLD, 20));
         victoryLabel.setVisible(false);
 
 
         //Iterierar genom knapparna och lägger till i Arraylist
-        for (int i = 1; i <= buttonIndex; i++) {
+        for (int i = 1; i <= index; i++) {
             JButton button = new JButton(String.valueOf(i));
-            button.setFont(new Font("Arial", Font.BOLD, 20));
-            button.setBorder(new CompoundBorder(buttonBorder, buttonPadding));
-            button.setPreferredSize(new Dimension(50, 50));
+            button.setFont(new Font("Poppins", Font.BOLD, 30));
+            button.setBorder(new CompoundBorder(buttonBorder,buttonPadding));
+            button.setPreferredSize(new Dimension(50,50));
 
             panelBoxes.add(button);
             buttons.add(button);
         }
+
+
+    }
+
+    public static void main(String[] args) {
+
+        GameUI main = new GameUI();
 
     }
 }
