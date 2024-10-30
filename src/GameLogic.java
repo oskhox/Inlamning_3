@@ -1,9 +1,9 @@
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-//i gameUI, instansiera denna klass med "jb.addMouseListener(new GameLogic()); för varje knapp
+//i gameUI, instansiera denna klass med "jb.addActionListener(new GameLogic()); för varje knapp (istället för this om i
 
-public class GameLogic extends MouseAdapter {
+public class GameLogic implements ActionListener {
 
     //behövs konstruktor?
     GameLogic() {
@@ -11,32 +11,20 @@ public class GameLogic extends MouseAdapter {
     }
 
     @Override
-    public void mouseEntered(MouseEvent entered) {
-        System.out.println("Mouse entered.");
-        //ogiltiga rutor blir ljusröda och de två giltiga blir ljusgröna när man hovrar
+    public void actionPerformed(ActionEvent e){
+
+        if (e.getSource() == "button1") { //eller vad knappen heter
+            System.out.println("Knapp 1 är tryckt på");
+            //knappen som tryckts ska byta plats med den tomma knappen.
+        }
+        if (e.getSource() == "buttonNewGame") {
+            System.out.println("Skapar nytt spel");
+            //logik för nytt spel, alla brickor blandas i slumpmässig ordning, inga identiska
+        }
 
     }
 
-    @Override
-    public void mouseExited(MouseEvent exited) {
-        System.out.println("Mouse exited.");
-        //återställer alltid aktuell knapps färg till ursprungsfärg när denna blir aktiverad
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent clicked) {
-        System.out.println("The mouse was clicked.");
-        //1. knappen som tryckts ska byta plats med den tomma knappen.
-
-        //2. om istället getSource är knappen "Nytt spel" så ska alla brickona blandas i slumpmässig ordning, inga identiska
-    }
-
-    //ON: FOKUSERA på hjälpmetoden checkNearbyButtons först. <- <- <-
-    //hjälpmetod checkNearbyButtons som identifierar knapparna ovanför, under, till höger och till vänster om aktuell knapp i gridLayout
-    //genom att vi har alla knappar i ett rutnät har alla knappar ett fast index som kan räknas ut
-    //den metoden tar emot int index från mouseClicked som skickar aktuell knapps index
-
-    //hjälpmetod checkValidButton som avgör om ruta är giltig eller inte
+    //hjälpmetod checkValidButton som avgör om ruta är giltig för flytt eller inte.
     boolean checkValidButton(int button) {
         boolean isValid = false;
 
