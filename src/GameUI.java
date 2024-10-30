@@ -29,7 +29,7 @@ public class GameUI extends JFrame {
 
         //Sätter layouter
         setLayout(new BorderLayout());
-        panelBoxes.setLayout(new GridLayout(4, 4,1,1));
+        panelBoxes.setLayout(new GridLayout(4, 4, 1, 1));
         panelBottom.setLayout(new FlowLayout());
 
         //Lägger till paneler till frame
@@ -53,8 +53,8 @@ public class GameUI extends JFrame {
         startButton.setOpaque(true);
         startButton.setFont(new Font("Poppins", Font.BOLD, 20));
         startButton.setBorder(buttonBorder);
-        startButton.setBorder(new CompoundBorder(startButtonBorder,startButtonPadding));
-        startButton.setPreferredSize(new Dimension(150,50));
+        startButton.setBorder(new CompoundBorder(startButtonBorder, startButtonPadding));
+        startButton.setPreferredSize(new Dimension(150, 50));
 
         //Design och viss funktionalitet för vinst label
         victoryLabel.setFont(new Font("Poppins", Font.BOLD, 20));
@@ -65,8 +65,8 @@ public class GameUI extends JFrame {
         for (int i = 1; i <= index; i++) {
             JButton button = new JButton(String.valueOf(i));
             button.setFont(new Font("Poppins", Font.BOLD, 30));
-            button.setBorder(new CompoundBorder(buttonBorder,buttonPadding));
-            button.setPreferredSize(new Dimension(50,50));
+            button.setBorder(new CompoundBorder(buttonBorder, buttonPadding));
+            button.setPreferredSize(new Dimension(50, 50));
 
             panelBoxes.add(button);
             buttons.add(button);
@@ -75,10 +75,4 @@ public class GameUI extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-
-        GameUI main = new GameUI();
-
-    }
 }
-
