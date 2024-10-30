@@ -1,10 +1,10 @@
 public class MainProgram {
 
     MainProgram() {
-        System.out.println("change");
+        new GameUI();
     }
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         new MainProgram();
     }
 }

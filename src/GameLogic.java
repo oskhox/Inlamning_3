@@ -1,40 +1,86 @@
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//i gameUI, instansiera denna klass med "jb.addActionListener(new GameLogic()); för varje knapp (istället för this om i
-
 public class GameLogic implements ActionListener {
+    private GameUI gu; //Håller GameUI
+    private final JButton[][] buttonsArray; //Håller arrayen med knapparna från GameUI
 
-    //behövs konstruktor?
-    GameLogic() {
-
+    //Konstruktor som tar emot nu gällande GameUI
+    GameLogic(GameUI gu) {
+        this.gu = gu;
+        this.buttonsArray = gu.getButtonsArray(); //Hämtar knapparnas array från GameUI
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
+        JButton clickedButton = (JButton) e.getSource(); //Hämtar in hela knappen som klickades på
+        String buttonText = clickedButton.getText();
+        System.out.println("Knappen " + buttonText + " är tryckt på."); //TO-DO: ta bort denna rad sen
 
-        if (e.getSource() == "button1") { //eller vad knappen heter
-            System.out.println("Knappen är tryckt på");
-            //knappen som tryckts ska byta plats med den tomma knappen.
+        //Hämta positionen för den klickade knappen genom att söka igenom 2D-arrayen
+        //Först söks varje rad
+        for (int row = 0; row < 4; row++) {
+            //Och inom varje rad söks varje kolumn igenom
+            for (int column = 0; column < 4; column++) {
+                if (buttonsArray[row][column] == clickedButton) { //Om någon knapp i 2D-arrayen matchar referensen för klickad knapp
+                    //Kollar först i varje riktning efter tom knapp, börjar med "up" först
+                    JButton emptyButton = returnEmptyButton("up", row, column);
+                    if (emptyButton == null)
+                        emptyButton = returnEmptyButton("down", row, column);
+                    if (emptyButton == null)
+                        emptyButton = returnEmptyButton("left", row, column);
+                    if (emptyButton == null)
+                        emptyButton = returnEmptyButton("right", row, column);
+
+                    //Byter sedan plats på knapparna om det finns en tom knapp ("") som inte är null
+                    if (emptyButton != null) {
+                        switchButtons(clickedButton, emptyButton);
+
+                    }
+                    break; //Avbryter när väl en knapp har flyttats
+                }
+            }
         }
-        if (e.getSource() == "buttonNewGame") {
-            System.out.println("Skapar nytt spel");
-            //logik för nytt spel, alla brickor blandas i slumpmässig ordning, inga identiska
+
+        //TO-DO: Om det är startknappen som trycks på, skapa nytt spel
+        //if (e.getSource() == startButton) {
+        //System.out.println("Skapar nytt spel");
+        //beginNewGame();
+        //logik för nytt spel, alla brickor blandas i slumpmässig ordning, inga identiska
+    }
+
+    //Hjälpmetod som returnerar tom knapp, om det finns. Skicka in önskad riktning att kontrollera samt klickade knappens rad och kolumn.
+    public JButton returnEmptyButton(String direction, int row, int column) {
+        JButton nextButton = null;
+        //Kontrollerar först så att det finns knappar i respektive riktning
+        if (direction.equals("up") && row > 0) {
+            nextButton = buttonsArray[row - 1][column];
+        } else if (direction.equals("down") && row < 3) {
+            nextButton = buttonsArray[row + 1][column];
+        } else if (direction.equals("left") && column > 0) {
+            nextButton = buttonsArray[row][column - 1];
+        } else if (direction.equals("right") && column < 3) {
+            nextButton = buttonsArray[row][column + 1];
         }
-    }
-    //hjälpmetod checkValidButton som avgör om ruta är giltig för flytt eller inte.
-    boolean checkValidButton(int button) {
-        boolean isValid = false;
 
-        //isValid = true om knappen norr om, söder om, väster om och öster om har innehållet "" (alltså är tom).
-        //returnera true
-
-        //isValid = false om ovan inte stämmer, alltså genom en else
-        //returnera false
-        return false; //temporärt
+        //Kontrollerar sen om den angränsande knappen är tom och returnera den om den är det
+        if (nextButton != null && nextButton.getText().isEmpty()) {
+            return nextButton;
+        }
+        //Om ingen tom knapp hittades returneras null
+        return null;
     }
 
-    //till sist metod som kontrollerar om alla brickor ligger rätt i nummerordning
-    //vi testar varje rad för sig, att rad 1 är 1-4, rad 2 är 5-8, rad 3 är 9-12, rad 4 är 13-15 + tom
-    //skriv då ut "Grattis, du vann!”
+    //Metod för att byta platser på två knappar
+    public void switchButtons(JButton clickedButton, JButton emptyButton) {
+        String clickedButtonText = clickedButton.getText(); //hämtar texten på den klickade knappen
+        clickedButton.setText(emptyButton.getText()); //sätter ny text på den klickade knappen
+        emptyButton.setText(clickedButtonText); //sätter ny text på den tomma knappen
+    }
+
+    //TO DO: Metod beginNewGame() som skapar ett nytt spel, som slumpar knappar 1-15 och blandar knappar
+
+    //TO DO: Metod youWon() som kontrollerar om alla brickor ligger rätt i nummerordning, vi testar varje rad för sig,
+    //rad 1 ska vara 1-4, rad 2 ska vara 5-8, rad 3 ska vara 9-12, rad 4 ska vara 13-15 + en tom "". skriv då ut "Grattis, du vann!”
 }
