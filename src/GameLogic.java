@@ -77,7 +77,7 @@ public class GameLogic implements ActionListener {
         emptyButton.setText(clickedButtonText); //sätter ny text på den tomma knappen
     }
 
-    //TO DO: Metod beginNewGame() som skapar ett nytt spel, som slumpar knappar 1-15 och blandar knappar
+    //TO DO: Metod beginNewGame() som skapar ett nytt spel, som slumpar knappar 1-15 och blandar knappar, ändra både 2d-array och GridLout
 
     //TO DO: Metod youWon() som kontrollerar om alla brickor ligger rätt i nummerordning, vi testar varje rad för sig sannolikt i arrayen,
     //rad 1 ska vara 1-4, rad 2 ska vara 5-8, rad 3 ska vara 9-12, rad 4 ska vara 13-15 + en tom "". skriv då ut "Grattis, du vann!”

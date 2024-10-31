@@ -62,6 +62,7 @@ public class GameUI extends JFrame {
         //Design och viss funktionalitet för vinst label
         victoryLabel.setFont(new Font("Poppins", Font.BOLD, 20));
         victoryLabel.setVisible(false);
+        //TO-DO: Anropa metod i GameLogic och sen setVisible(true)
 
         //Itererar genom knapparna och lägger till var och en i buttonsArray samt i panelen
         int number = 1; //nummer på första knappen
