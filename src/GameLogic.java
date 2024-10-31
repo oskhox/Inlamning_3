@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GameLogic implements ActionListener {
     private GameUI gui; //Håller GameUI
@@ -41,6 +44,7 @@ public class GameLogic implements ActionListener {
             }
         }
 
+
         //TO-DO: Om det är startknappen som trycks på, skapa nytt spel
         //if (e.getSource() == startButton) {
         //System.out.println("Skapar nytt spel");
@@ -76,6 +80,52 @@ public class GameLogic implements ActionListener {
         clickedButton.setText(emptyButton.getText()); //sätter tom text på den klickade knappen
         emptyButton.setText(clickedButtonText); //sätter ny text på den tomma knappen
     }
+
+
+    //Metod för att lägga siffrorna i en lista och shuffla
+    public List<JButton> shuffleNumbersToList() {
+        JButton[][] buttonsArray = gui.getButtonsArray();
+        List<JButton> buttonList = new ArrayList<>();
+
+        for (int row = 0; row <buttonsArray.length; row++) {
+            for (int column = 0; column < buttonsArray[row].length; column++) {
+                buttonList.add(buttonsArray[row][column]);
+            }
+        }
+        Collections.shuffle(buttonList);
+        return buttonList;
+
+    }
+
+    //Metod för att lägga tillbaka de shufflade siffrorna tillbaka i en 2 dimensionell array
+    public void updateButtonsArray(List<JButton> shuffledList) {
+        JButton[][] buttonsArray = gui.getButtonsArray();
+        int index = 0;
+
+        for (int row = 0; row < buttonsArray.length; row++) {
+            for (int column = 0; column < buttonsArray[row].length; column++) {
+                JButton button = shuffledList.get(index++);
+                 buttonsArray[row][column] = button;
+                 gui.getPanelBoxes().add(button);
+            }
+        }
+        gui.getPanelBoxes().revalidate();
+        gui.getPanelBoxes().repaint();
+
+    }
+
+    //Metod för att starta det nya spelet, anropar våra tre andra metoder
+    public void beginNewGame() {
+        List<JButton> shuffledList = shuffleNumbersToList();
+        updateButtonsArray(shuffledList);
+        gui.updatePanelBoxes();
+
+    }
+
+
+
+
+
 
     //TO DO: Metod beginNewGame() som skapar ett nytt spel, som slumpar knappar 1-15 och blandar knappar, ändra både 2d-array och GridLout
 
