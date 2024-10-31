@@ -6,9 +6,8 @@ public class GameLogic implements ActionListener {
     private GameUI gu; //Håller GameUI
     private final JButton[][] buttonsArray; //Håller arrayen med knapparna från GameUI
 
-    //Konstruktor som tar emot nu gällande GameUI
     GameLogic(GameUI gu) {
-        this.gu = gu;
+        this.gu = gu; //Hämtar nu gällande GameUI
         this.buttonsArray = gu.getButtonsArray(); //Hämtar knapparnas array från GameUI
     }
 
@@ -26,7 +25,7 @@ public class GameLogic implements ActionListener {
                 if (buttonsArray[row][column] == clickedButton) { //Om någon knapp i 2D-arrayen matchar referensen för klickad knapp
                     //Kollar först i varje riktning efter tom knapp, börjar med "up" först
                     JButton emptyButton = returnEmptyButton("up", row, column);
-                    if (emptyButton == null)
+                    if (emptyButton == null) //Dvs. hittade ingen empty button
                         emptyButton = returnEmptyButton("down", row, column);
                     if (emptyButton == null)
                         emptyButton = returnEmptyButton("left", row, column);
@@ -36,7 +35,6 @@ public class GameLogic implements ActionListener {
                     //Byter sedan plats på knapparna om det finns en tom knapp ("") som inte är null
                     if (emptyButton != null) {
                         switchButtons(clickedButton, emptyButton);
-
                     }
                     break; //Avbryter när väl en knapp har flyttats
                 }
@@ -75,7 +73,7 @@ public class GameLogic implements ActionListener {
     //Metod för att byta platser på två knappar
     public void switchButtons(JButton clickedButton, JButton emptyButton) {
         String clickedButtonText = clickedButton.getText(); //hämtar texten på den klickade knappen
-        clickedButton.setText(emptyButton.getText()); //sätter ny text på den klickade knappen
+        clickedButton.setText(emptyButton.getText()); //sätter tom text på den klickade knappen
         emptyButton.setText(clickedButtonText); //sätter ny text på den tomma knappen
     }
 

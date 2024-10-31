@@ -76,7 +76,7 @@ public class GameUI extends JFrame {
                 } else {
                     button = new JButton(""); //Den 16:e knappen blir tom
                 }
-                //Sätter font på varje knapp
+                //Sätter visuella attribut på varje knapp
                 button.setFont(new Font("Poppins", Font.BOLD, 30));
                 button.setBorder(new CompoundBorder(buttonBorder, buttonPadding));
                 button.setPreferredSize(new Dimension(50, 50));
