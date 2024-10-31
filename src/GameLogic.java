@@ -3,12 +3,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameLogic implements ActionListener {
-    private GameUI gu; //Håller GameUI
+    private GameUI gui; //Håller GameUI
     private final JButton[][] buttonsArray; //Håller arrayen med knapparna från GameUI
 
-    GameLogic(GameUI gu) {
-        this.gu = gu; //Hämtar nu gällande GameUI
-        this.buttonsArray = gu.getButtonsArray(); //Hämtar knapparnas array från GameUI
+    GameLogic(GameUI gui_input) {
+        this.gui = gui_input; //Hämtar nu gällande GameUI
+        this.buttonsArray = gui.getButtonsArray(); //Hämtar knapparnas array från GameUI
     }
 
     @Override
@@ -81,4 +81,8 @@ public class GameLogic implements ActionListener {
 
     //TO DO: Metod youWon() som kontrollerar om alla brickor ligger rätt i nummerordning, vi testar varje rad för sig sannolikt i arrayen,
     //rad 1 ska vara 1-4, rad 2 ska vara 5-8, rad 3 ska vara 9-12, rad 4 ska vara 13-15 + en tom "". skriv då ut "Grattis, du vann!”
+
+    //hämta in aktuell 2D-array
+    //ha en räknare
+    //loopa igenom
 }
