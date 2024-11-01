@@ -73,7 +73,7 @@ public class GameUI extends JFrame {
         victoryLabel.setVisible(false);
     }
 
-    //Itererar genom knapparna och lägger till var och en i buttonsArray samt i panelen
+    //Metod som itererar genom knapparna och lägger till var och en i buttonsArray samt i panelen
     public void initializeButtons(JPanel panelBoxes, ActionListener gl) {
         int number = 1; //nummer på första knappen
         for (int row = 0; row < 4; row++) {

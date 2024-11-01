@@ -41,7 +41,7 @@ public class GameLogic implements ActionListener {
         }
     }
 
-    //Hjälpmetod som returnerar tom knapp, om det finns. Skicka in önskad riktning att kontrollera samt klickade knappens rad och kolumn.
+    //Metod för att returnera tom knapp, om det finns. Skicka in önskad riktning att kontrollera samt klickade knappens rad och kolumn.
     public JButton returnEmptyButton(String direction, int row, int column) {
         JButton nextButton = null;
         //Kontrollerar först så att det finns knappar i respektive riktning
@@ -63,7 +63,7 @@ public class GameLogic implements ActionListener {
         return null;
     }
 
-    //Byt plats på två knappar
+    //Metod för att byta plats på två knappar
     public void switchButtons(JButton clickedButton, JButton emptyButton) {
         String clickedButtonText = clickedButton.getText(); //Hämtar texten på den klickade knappen
         clickedButton.setText(emptyButton.getText()); //Sätter tom text på den klickade knappen
@@ -83,7 +83,6 @@ public class GameLogic implements ActionListener {
         }
         Collections.shuffle(buttonList);
         return buttonList;
-
     }
 
     //Metod för att lägga tillbaka de shufflade siffrorna tillbaka i en 2 dimensionell array
@@ -110,7 +109,7 @@ public class GameLogic implements ActionListener {
         gui.getVictoryLabel().setVisible(false);
     }
 
-    //Kontrollera om vinst, detta sker efter varje förflyttning
+    //Metod för att kontrollera om vinst, detta sker efter varje förflyttning
     public boolean youWon() {
         int buttonToCheck = 1;
         int buttonsMatched = 0;
