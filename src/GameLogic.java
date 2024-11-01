@@ -16,7 +16,7 @@ public class GameLogic implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton clickedButton = (JButton) e.getSource(); //Hämtar in hela knappen som klickades på
+        JButton clickedButton = (JButton) e.getSource(); //Hämtar in hela knappen som klickades på.
 
         //Hämtar positionen för den klickade knappen genom att söka igenom 2D-arrayen
         for (int row = 0; row < 4; row++) {
