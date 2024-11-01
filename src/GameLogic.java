@@ -8,7 +8,7 @@ public class GameLogic implements ActionListener {
 
     GameLogic(GameUI gui_input) {
         this.gui = gui_input; //Hämtar nu gällande GameUI
-        this.buttonsArray = gui.getButtonsArray(); //Hämtar knapparnas array från GameUI
+        this.buttonsArray = gui.getButtonsArray(); //Hämtar nu gällande array från GameUI
     }
 
     @Override
@@ -18,9 +18,7 @@ public class GameLogic implements ActionListener {
         System.out.println("Knappen " + buttonText + " är tryckt på."); //TO-DO: ta bort denna rad sen
 
         //Hämta positionen för den klickade knappen genom att söka igenom 2D-arrayen
-        //Först söks varje rad
         for (int row = 0; row < 4; row++) {
-            //Och inom varje rad söks varje kolumn igenom
             for (int column = 0; column < 4; column++) {
                 if (buttonsArray[row][column] == clickedButton) { //Om någon knapp i 2D-arrayen matchar referensen för klickad knapp
                     //Kollar först i varje riktning efter tom knapp, börjar med "up" först
@@ -70,19 +68,32 @@ public class GameLogic implements ActionListener {
         return null;
     }
 
-    //Metod för att byta platser på två knappar
+    //Byt plats på två knappar
     public void switchButtons(JButton clickedButton, JButton emptyButton) {
-        String clickedButtonText = clickedButton.getText(); //hämtar texten på den klickade knappen
-        clickedButton.setText(emptyButton.getText()); //sätter tom text på den klickade knappen
-        emptyButton.setText(clickedButtonText); //sätter ny text på den tomma knappen
+        String clickedButtonText = clickedButton.getText(); //Hämtar texten på den klickade knappen
+        clickedButton.setText(emptyButton.getText()); //Sätter tom text på den klickade knappen
+        emptyButton.setText(clickedButtonText); //Sätter ny text på den tomma knappen
+        gui.updateWinText(); //Kontrollerar om vinst efter förflyttning
     }
 
-    //TO DO: Metod beginNewGame() som skapar ett nytt spel, som slumpar knappar 1-15 och blandar knappar, ändra både 2d-array och GridLout
+    //Kontrollera om vinst, detta sker efter varje förflyttning
+    public boolean youWon() {
+        int buttonToCheck = 1;
+        int buttonsMatched = 0;
 
-    //TO DO: Metod youWon() som kontrollerar om alla brickor ligger rätt i nummerordning, vi testar varje rad för sig sannolikt i arrayen,
-    //rad 1 ska vara 1-4, rad 2 ska vara 5-8, rad 3 ska vara 9-12, rad 4 ska vara 13-15 + en tom "". skriv då ut "Grattis, du vann!”
-
-    //hämta in aktuell 2D-array
-    //ha en räknare
-    //loopa igenom
+        //Loopar igenom alla knappar
+        for (int row = 0; row < 4; row++) {
+            for (int column = 0; column < 4; column++) {
+                //För varje knapp;
+                String buttonText = buttonsArray[row][column].getText();
+                //Om knappen inte är tom och matchning 1-15 sker
+                if (!buttonText.isEmpty() && buttonText.equals(String.valueOf(buttonToCheck))) {
+                    buttonsMatched++;
+                }
+                buttonToCheck++;
+            }
+        }
+        //Returnerar true om första eller sista knappen är tom och 15 knappar har matchat
+        return (buttonsArray[0][0].getText().isEmpty() || buttonsArray[3][3].getText().isEmpty() && (buttonsMatched == 15));
+    }
 }
