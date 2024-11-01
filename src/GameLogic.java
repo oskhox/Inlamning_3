@@ -117,7 +117,7 @@ public class GameLogic implements ActionListener {
 
         for (int row = 0; row < 4; row++) {
             for (int column = 0; column < 4; column++) {
-                //För varje knapp;
+                //För varje knapp
                 String buttonText = buttonsArray[row][column].getText();
                 //Om knappen inte är tom och matchning 1-15 sker
                 if (!buttonText.isEmpty() && buttonText.equals(String.valueOf(buttonToCheck))) {
@@ -127,6 +127,6 @@ public class GameLogic implements ActionListener {
             }
         }
         //Returnerar true om första eller sista knappen är tom och 15 knappar har matchat
-        return (buttonsArray[0][0].getText().isEmpty() || buttonsArray[3][3].getText().isEmpty() && (buttonsMatched == 15));
+        return (buttonsArray[3][3].getText().isEmpty() && (buttonsMatched == 15));
     }
 }
