@@ -70,7 +70,11 @@ public class GameUI extends JFrame {
         //Design och viss funktionalitet för vinst label
         victoryLabel.setFont(new Font("Poppins", Font.BOLD, 20));
         victoryLabel.setVisible(false);
+    }
 
+    //Getter för victoryLabel så att den kan sättas till false vid nytt spel
+    public JLabel getVictoryLabel() {
+        return victoryLabel;
     }
 
     //Gjort till en metod så den kan anropas

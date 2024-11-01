@@ -80,9 +80,8 @@ public class GameLogic implements ActionListener {
         gui.updateWinText(); //Kontrollerar om vinst efter förflyttning
     }
 
-
     //Metod för att lägga siffrorna i en lista och shuffla
-    public List<JButton> shuffleNumbersToList() {
+    public List<JButton> toListAndShuffle() {
         JButton[][] buttonsArray = gui.getButtonsArray();
         List<JButton> buttonList = new ArrayList<>();
 
@@ -114,9 +113,10 @@ public class GameLogic implements ActionListener {
 
     //Metod för att starta det nya spelet, anropar våra tre andra metoder
     public void beginNewGame() {
-        List<JButton> shuffledList = shuffleNumbersToList();
+        List<JButton> shuffledList = toListAndShuffle();
         updateButtonsArray(shuffledList);
         gui.updatePanelBoxes();
+        gui.getVictoryLabel().setVisible(false);
     }
 
     //TO DO: Metod beginNewGame() som skapar ett nytt spel, som slumpar knappar 1-15 och blandar knappar, ändra både 2d-array och GridLout
