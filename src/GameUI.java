@@ -11,12 +11,11 @@ public class GameUI extends JFrame {
     private final JPanel panelBottom = new JPanel();
     private final JButton startButton = new JButton("Nytt spel");
     private final JLabel victoryLabel = new JLabel("Grattis, du vann!");
-    Border buttonPadding = new EmptyBorder(1, 1, 1, 1);
-    Border buttonBorder = new LineBorder(Color.orange, 6, true);
+    private Border buttonPadding = new EmptyBorder(1, 1, 1, 1);
+    private Border buttonBorder = new LineBorder(Color.orange, 6, true);
     private JButton[][] buttonsArray = new JButton[4][4]; //Deklarerar 2D-array av JButtons för att möjliggöra sökning
-    GameLogic gl = new GameLogic(this); //Skapar upp en instans av GameLogic och skickar in aktuell instans av GameUI. Används på varje knapp.
+    private GameLogic gl = new GameLogic(this); //Skapar upp en instans av GameLogic och skickar in aktuell instans av GameUI. Används på varje knapp.
 
-    //Konstruktor
     GameUI() {
         userInterface();
         setTitle("15-spel");
@@ -33,7 +32,11 @@ public class GameUI extends JFrame {
     }
 
     public JButton[][] getButtonsArray() {
-        return buttonsArray; //Returnera knapparnas array till GameLogic
+        return buttonsArray;
+    }
+
+    public JLabel getVictoryLabel() {
+        return victoryLabel;
     }
 
     public void userInterface() {
@@ -51,8 +54,6 @@ public class GameUI extends JFrame {
         panelBottom.add(victoryLabel);
         panelBottom.setBackground(Color.ORANGE);
 
-        //Sätter ram och padding panel boxes
-
         //Sätter design på knappen "Nytt spel"
         Border startButtonPadding = new EmptyBorder(5, 2, 5, 2);
         Border startButtonBorder = new LineBorder(Color.BLACK, 3, true);
@@ -64,24 +65,17 @@ public class GameUI extends JFrame {
         startButton.setBorder(buttonPadding);
         startButton.setBorder(new CompoundBorder(startButtonBorder, startButtonPadding));
         startButton.setPreferredSize(new Dimension(150, 50));
-        //TO-DO: Gör så att startknappen innebär en ny spelomgång med lambda
-        startButton.addActionListener(e -> gl.beginNewGame());
+
+        startButton.addActionListener(e -> gl.beginNewGame()); //Spelet startar om när man trycker på Nytt spel
 
         //Design och viss funktionalitet för vinst label
         victoryLabel.setFont(new Font("Poppins", Font.BOLD, 20));
         victoryLabel.setVisible(false);
     }
 
-    //Getter för victoryLabel så att den kan sättas till false vid nytt spel
-    public JLabel getVictoryLabel() {
-        return victoryLabel;
-    }
-
-    //Gjort till en metod så den kan anropas
     //Itererar genom knapparna och lägger till var och en i buttonsArray samt i panelen
     public void initializeButtons(JPanel panelBoxes, ActionListener gl) {
         int number = 1; //nummer på första knappen
-        //Skapar upp 4 rader
         for (int row = 0; row < 4; row++) {
             //För varje rad skapar den 4 kolumner med en knapp i varje
             for (int column = 0; column < 4; column++) {

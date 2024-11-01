@@ -6,27 +6,25 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameLogic implements ActionListener {
-    private GameUI gui; //Håller GameUI
+    private final GameUI gui;
     private final JButton[][] buttonsArray; //Håller arrayen med knapparna från GameUI
 
     GameLogic(GameUI gui_input) {
-        this.gui = gui_input; //Hämtar nu gällande GameUI
+        this.gui = gui_input;
         this.buttonsArray = gui.getButtonsArray(); //Hämtar nu gällande array från GameUI
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource(); //Hämtar in hela knappen som klickades på
-        String buttonText = clickedButton.getText();
-        System.out.println("Knappen " + buttonText + " är tryckt på."); //TO-DO: ta bort denna rad sen
 
-        //Hämta positionen för den klickade knappen genom att söka igenom 2D-arrayen
+        //Hämtar positionen för den klickade knappen genom att söka igenom 2D-arrayen
         for (int row = 0; row < 4; row++) {
             for (int column = 0; column < 4; column++) {
                 if (buttonsArray[row][column] == clickedButton) { //Om någon knapp i 2D-arrayen matchar referensen för klickad knapp
                     //Kollar först i varje riktning efter tom knapp, börjar med "up" först
                     JButton emptyButton = returnEmptyButton("up", row, column);
-                    if (emptyButton == null) //Dvs. hittade ingen empty button
+                    if (emptyButton == null)
                         emptyButton = returnEmptyButton("down", row, column);
                     if (emptyButton == null)
                         emptyButton = returnEmptyButton("left", row, column);
@@ -41,13 +39,6 @@ public class GameLogic implements ActionListener {
                 }
             }
         }
-
-
-        //TO-DO: Om det är startknappen som trycks på, skapa nytt spel
-        //if (e.getSource() == startButton) {
-        //System.out.println("Skapar nytt spel");
-        //beginNewGame();
-        //logik för nytt spel, alla brickor blandas i slumpmässig ordning, inga identiska
     }
 
     //Hjälpmetod som returnerar tom knapp, om det finns. Skicka in önskad riktning att kontrollera samt klickade knappens rad och kolumn.
@@ -85,9 +76,9 @@ public class GameLogic implements ActionListener {
         JButton[][] buttonsArray = gui.getButtonsArray();
         List<JButton> buttonList = new ArrayList<>();
 
-        for (int row = 0; row < buttonsArray.length; row++) {
-            for (int column = 0; column < buttonsArray[row].length; column++) {
-                buttonList.add(buttonsArray[row][column]);
+        for (JButton[] jButtons : buttonsArray) {
+            for (JButton jButton : jButtons) {
+                buttonList.add(jButton);
             }
         }
         Collections.shuffle(buttonList);
@@ -119,14 +110,11 @@ public class GameLogic implements ActionListener {
         gui.getVictoryLabel().setVisible(false);
     }
 
-    //TO DO: Metod beginNewGame() som skapar ett nytt spel, som slumpar knappar 1-15 och blandar knappar, ändra både 2d-array och GridLout
-
     //Kontrollera om vinst, detta sker efter varje förflyttning
     public boolean youWon() {
         int buttonToCheck = 1;
         int buttonsMatched = 0;
 
-        //Loopar igenom alla knappar
         for (int row = 0; row < 4; row++) {
             for (int column = 0; column < 4; column++) {
                 //För varje knapp;
